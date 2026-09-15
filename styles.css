@@ -32,11 +32,11 @@
   --on-accent: #0b0d12;
 
   --aurora:
-    radial-gradient(60% 80% at 8% 20%, rgba(245, 182, 46, 0.85) 0%, rgba(245, 182, 46, 0) 60%),
-    radial-gradient(55% 70% at 45% 10%, rgba(255, 62, 165, 0.85) 0%, rgba(255, 62, 165, 0) 60%),
-    radial-gradient(50% 80% at 60% 90%, rgba(124, 58, 237, 0.9) 0%, rgba(124, 58, 237, 0) 60%),
-    radial-gradient(60% 70% at 95% 30%, rgba(20, 184, 166, 0.85) 0%, rgba(20, 184, 166, 0) 60%),
-    linear-gradient(135deg, #1a0f2b 0%, #2a1240 50%, #0c2a2e 100%);
+    radial-gradient(60% 80% at 8% 20%, rgba(245, 182, 46, 0.28) 0%, rgba(245, 182, 46, 0) 60%),
+    radial-gradient(55% 70% at 45% 10%, rgba(255, 62, 165, 0.26) 0%, rgba(255, 62, 165, 0) 60%),
+    radial-gradient(50% 80% at 60% 90%, rgba(124, 58, 237, 0.38) 0%, rgba(124, 58, 237, 0) 60%),
+    radial-gradient(60% 70% at 95% 30%, rgba(20, 184, 166, 0.28) 0%, rgba(20, 184, 166, 0) 60%),
+    linear-gradient(135deg, #0f0d1c 0%, #140f26 50%, #0a1a1f 100%);
 
   --radius-xl: 28px;
   --radius-lg: 20px;
@@ -442,7 +442,7 @@ a.work-card:hover .work-arrow, a.work-card:focus-visible .work-arrow { opacity: 
   background: var(--aurora); color: var(--ink); border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 3rem 1.5rem; text-align: center;
 }
-.cta::before { content: ''; position: absolute; inset: 0; background: rgba(4, 6, 12, 0.35); pointer-events: none; }
+.cta::before { content: ''; position: absolute; inset: 0; background: rgba(4, 6, 12, 0.2); pointer-events: none; }
 .cta > * { position: relative; }
 .cta .eyebrow { color: rgba(255, 255, 255, 0.75); }
 .cta h2 { margin-top: 0.5rem; font-size: clamp(1.9rem, 4.2vw, 3.2rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; color: #fff; }
