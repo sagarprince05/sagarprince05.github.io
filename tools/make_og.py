@@ -9,7 +9,7 @@ OUT = os.path.join(ROOT, "assets", "og.png")
 PHOTO = os.path.join(ROOT, "assets", "prince.webp")
 FONTS = r"C:\Windows\Fonts"
 
-BG, GOLD, INK, MUTED = (9, 13, 22), (245, 182, 46), (244, 246, 250), (182, 191, 204)
+BG, GOLD, INK, MUTED = (9, 13, 22), (128, 255, 0), (244, 246, 250), (182, 191, 204)
 bold = lambda s: ImageFont.truetype(f"{FONTS}\\segoeuib.ttf", s)
 reg = lambda s: ImageFont.truetype(f"{FONTS}\\segoeui.ttf", s)
 serif_i = lambda s: ImageFont.truetype(f"{FONTS}\\georgiai.ttf", s)

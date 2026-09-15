@@ -1,7 +1,7 @@
 /* ==========================================================================
    Prince Sagar — Forward Deployed Engineer portfolio
    "Midnight" palette: near-black navy, deep blue glows, white type,
-   gold accent, aurora gradient for feature blocks. Tokens live in :root.
+   chartreuse accent, aurora gradient for feature blocks. Tokens live in :root.
    ========================================================================== */
 
 /* ---------- Tokens ---------- */
@@ -20,10 +20,10 @@
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
 
-  --accent: #f5b62e;          /* gold */
-  --accent-bright: #ffd166;
-  --accent-deep: #d99a0c;
-  --accent-soft: rgba(245, 182, 46, 0.14);
+  --accent: #80ff00;          /* chartreuse */
+  --accent-bright: #a6ff3d;
+  --accent-deep: #66cc00;
+  --accent-soft: rgba(128, 255, 0, 0.14);
   --blue: #2f6bff;
   --blue-soft: rgba(47, 107, 255, 0.35);
   --magenta: #ff3ea5;
@@ -32,7 +32,7 @@
   --on-accent: #0b0d12;
 
   --aurora:
-    radial-gradient(60% 80% at 8% 20%, rgba(245, 182, 46, 0.28) 0%, rgba(245, 182, 46, 0) 60%),
+    radial-gradient(60% 80% at 8% 20%, rgba(128, 255, 0, 0.22) 0%, rgba(128, 255, 0, 0) 60%),
     radial-gradient(55% 70% at 45% 10%, rgba(255, 62, 165, 0.26) 0%, rgba(255, 62, 165, 0) 60%),
     radial-gradient(50% 80% at 60% 90%, rgba(124, 58, 237, 0.38) 0%, rgba(124, 58, 237, 0) 60%),
     radial-gradient(60% 70% at 95% 30%, rgba(20, 184, 166, 0.28) 0%, rgba(20, 184, 166, 0) 60%),
@@ -105,7 +105,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 .btn svg { width: 1rem; height: 1rem; }
-.btn-dark { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 30px -12px rgba(245, 182, 46, 0.6); }
+.btn-dark { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 30px -12px rgba(128, 255, 0, 0.55); }
 .btn-dark:hover { background: var(--accent-bright); }
 .btn-lime { background: var(--accent); color: var(--on-accent); }
 .btn-lime:hover { background: var(--accent-bright); }
@@ -188,7 +188,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   font-family: var(--font-serif); font-style: italic; font-weight: 400;
   font-size: clamp(2.5rem, 5.8vw, 4.6rem); letter-spacing: -0.02em;
   color: var(--accent);
-  text-shadow: 0 0 40px rgba(245, 182, 46, 0.25);
+  text-shadow: 0 0 40px rgba(128, 255, 0, 0.22);
 }
 .hero-blurb { max-width: 30rem; font-size: 1.05rem; line-height: 1.6; color: var(--text); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
