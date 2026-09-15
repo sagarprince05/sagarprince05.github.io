@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Humyn Watcher — AI-Powered Slack Data Assistant — Prince Sagar</title>
+  <meta name="description" content="Case study: a serverless AI assistant for Slack that turns plain-English (or Hinglish) questions into verified, live database answers in ~3 seconds — running 24/7 on Cloudflare Workers, Groq LLMs and Supabase at zero infrastructure cost.">
+  <meta name="author" content="Prince Sagar">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Humyn Watcher — AI-powered Slack data assistant — case study">
+  <meta property="og:description" content="Ask questions about live operations data in Slack and get accurate, verified answers in ~3 seconds. Serverless, ₹0/month, never hallucinates.">
+  <meta property="og:url" content="https://sagarprince05.github.io/projects/humyn-watcher.html">
+  <link rel="canonical" href="https://sagarprince05.github.io/projects/humyn-watcher.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersLight ? 'light' : 'dark'));
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <nav class="case-nav" aria-label="Site">
+    <a class="brand" href="../index.html#projects">
+      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10z" clip-rule="evenodd"/></svg>
+      Prince Sagar
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </nav>
+
+  <main id="content" class="case">
+    <article>
+      <header class="reveal">
+        <p class="case-eyebrow">Case study · Humyn Labs (KGeN)</p>
+        <h1 class="case-title">Humyn Watcher — AI-powered Slack data assistant</h1>
+        <p class="case-lede">A production Slack bot that lets a team ask questions about live company operations data in plain English (or Hinglish, typos and all) and get accurate, verified answers in ~3 seconds — running 24/7 on a completely free cloud stack (Cloudflare Workers + Groq LLMs + Supabase Postgres) at zero infrastructure cost.</p>
+
+        <dl class="case-meta">
+          <div><dt>Role</dt><dd>Built and deployed end-to-end, from the first prototype to the production Worker</dd></div>
+          <div><dt>Timeline</dt><dd>July – September 2026</dd></div>
+          <div><dt>Status</dt><dd>Live — running 24/7 on Cloudflare Workers; the team asks it questions in Slack daily</dd></div>
+          <div><dt>Infra cost</dt><dd>₹0 / month — Cloudflare, Groq and Supabase free tiers</dd></div>
+        </dl>
+
+        <ul class="stats" aria-label="Results">
+          <li class="stat"><div class="stat-value">~3<small>s</small></div><div class="stat-label">median answer time, end to end</div></li>
+          <li class="stat"><div class="stat-value">₹0</div><div class="stat-label">monthly infrastructure cost</div></li>
+          <li class="stat"><div class="stat-value">24/7</div><div class="stat-label">fully serverless — no laptop or server to keep running</div></li>
+          <li class="stat"><div class="stat-value">75k+</div><div class="stat-label">audit events served, across 30+ sites and ~4,200 workers</div></li>
+        </ul>
+      </header>
+
+      <div class="prose reveal">
+        <h2>Overview</h2>
+        <p>Anyone on the team can @mention the bot or DM it a question like <em>"how many Akai cameras do we have?"</em> or <em>"top 3 most active operators this week"</em> — even with spelling mistakes or mixed Hindi-English — and the bot writes the SQL, queries the company's Postgres database in real time, and replies in the Slack thread with the answer plus a receipt showing exactly what it searched.</p>
+
+        <h2>The problem</h2>
+        <p>Operations data (projects, workers, assets, task events) lived in a Postgres database that only technical people could query. Everyone else had to ask around or wait. The goal: instant self-serve answers inside Slack, with strict accuracy — the bot must never invent data — and a hard constraint of zero budget (free tiers only).</p>
+
+        <h2>Architecture</h2>
+        <ul>
+          <li><strong>Slack Events API → Cloudflare Worker.</strong> A serverless HTTP endpoint verifies every request with Slack's HMAC signature, deduplicates retries, and enforces an admin-managed allowlist so only approved teammates can use the bot.</li>
+          <li><strong>Text-to-SQL with Groq LLMs.</strong> A large reasoning model (<code>gpt-oss-120b</code>) converts the question into a read-only SQL query, guided by a hand-built data dictionary of the schema's quirks and team vocabulary. A smaller model handles conversational phrasing, with automatic fallback chains across models when one is rate-limited or retired.</li>
+          <li><strong>Supabase Postgres via Cloudflare Hyperdrive.</strong> Connection pooling between the edge and the database, using a dedicated read-only role locked to a single schema with a statement timeout — so the bot can never modify or leak data outside its scope.</li>
+          <li><strong>Cloudflare KV.</strong> Stores per-thread conversation memory (so follow-ups like "why?" work), the user allowlist, a 15-minute auto-refreshing schema cache, and an overflow queue for burst traffic.</li>
+          <li><strong>Cron triggers.</strong> Drain the overflow queue and keep the bot's knowledge of the database current with no manual updates.</li>
+        </ul>
+
+        <h2>Key features</h2>
+        <ul>
+          <li><strong>Ask anything, any way</strong> — tolerant of typos, broken grammar and Hinglish; always answers in English.</li>
+          <li><strong>Self-correcting SQL</strong> — on a database error it retries with the error message; on zero rows it reinterprets the question once (users' vocabulary rarely matches database enum values).</li>
+          <li><strong>Never hallucinates</strong> — company-data answers come only from real query results; every answer carries a <code>_searched: …_</code> or <code>_query: …_</code> receipt so users can verify what was checked. If the database is unreachable, the bot says so honestly instead of guessing.</li>
+          <li><strong>Deterministic numbers</strong> — single-value answers (counts, totals) bypass the language model entirely, so a number can never be garbled in phrasing.</li>
+          <li><strong>Conversation memory</strong> — threads remember context, so follow-up questions work naturally.</li>
+          <li><strong>Live knowledge layer</strong> — admins can teach the bot new terms and verified queries directly from Slack (<code>define</code>, <code>teach</code>) with no redeploy; taught SQL is test-run before it's saved.</li>
+          <li><strong>Self-updating</strong> — the schema, enum values and live project list refresh automatically every 15 minutes; the bot discovered 9 newly added projects and a workforce jump from ~2,800 to ~4,200 workers with zero manual changes.</li>
+          <li><strong>Burst-proof on free tiers</strong> — a model-fallback chain plus a KV-backed overflow queue absorbed 12 simultaneous questions and 20 rapid-fire questions in testing with zero failures, despite per-model free-tier token limits.</li>
+        </ul>
+
+        <h2>Engineering challenges solved</h2>
+        <ul>
+          <li>Direct Postgres connections from edge workers hit subrequest limits — solved with Hyperdrive and by diagnosing a double-pooling conflict between Hyperdrive and Supabase's transaction pooler.</li>
+          <li>Groq retired two production models overnight with no notice — the bot recovered via automatic 404/rate-limit fallbacks; the incident led to a resilient multi-model chain.</li>
+          <li>Early versions occasionally fabricated data when the database path failed — fixed with layered anti-fabrication guards (honest failure replies, receipts on every answer, deterministic rendering of results).</li>
+          <li>Timezone bugs, messy free-text data and schema traps (columns that are always NULL, brand names hidden in variant fields) — all captured as rules in a living data dictionary that grows every time a wrong answer is reported.</li>
+        </ul>
+
+        <h2>Results</h2>
+        <ul>
+          <li>~3 second median answer time, end to end.</li>
+          <li>₹0 / month infrastructure cost — entirely on Cloudflare, Groq and Supabase free tiers.</li>
+          <li>24/7 availability — fully serverless, no laptop or server to keep running.</li>
+          <li>Serving live data across 30+ project sites, ~4,200 workers and 75,000+ audit events, with accuracy that improves continuously through a screenshot-feedback loop.</li>
+        </ul>
+
+        <h2>Tech stack</h2>
+        <ul class="tags" aria-label="Technologies used">
+          <li>Cloudflare Workers</li><li>Cloudflare KV</li><li>Cloudflare Hyperdrive</li><li>Slack Events API</li><li>Groq (gpt-oss-120b / gpt-oss-20b / Qwen)</li><li>Gemini Flash (overflow)</li><li>Supabase Postgres</li><li>postgres.js</li><li>JavaScript</li><li>Wrangler</li>
+        </ul>
+      </div>
+
+      <footer class="case-footer">
+        <a class="inline-link" href="site-onboarding.html">
+          <svg class="arrow arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+          Previous: Site Onboarding
+        </a>
+        <a class="inline-link" href="voucher-price-tracker.html">
+          Next: Voucher Price Tracker
+          <svg class="arrow arrow-right" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

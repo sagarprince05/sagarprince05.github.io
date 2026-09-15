@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voucher Price Tracker — Competitor Price Intelligence — Prince Sagar</title>
+  <meta name="description" content="Case study: an end-to-end competitor price-intelligence pipeline for the gift voucher and gaming credits market — a Python scraper covering four platforms, ~2,200 products synced to Supabase with price history in ~35 seconds, every 12 hours on GitHub Actions at zero cost.">
+  <meta name="author" content="Prince Sagar">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Voucher Price Tracker — competitor price intelligence — case study">
+  <meta property="og:description" content="Four competitor platforms, ~2,200 products, one schema, full price history — scraped and synced in ~35 seconds, twice a day, for free.">
+  <meta property="og:url" content="https://sagarprince05.github.io/projects/voucher-price-tracker.html">
+  <link rel="canonical" href="https://sagarprince05.github.io/projects/voucher-price-tracker.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersLight ? 'light' : 'dark'));
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <nav class="case-nav" aria-label="Site">
+    <a class="brand" href="../index.html#projects">
+      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10z" clip-rule="evenodd"/></svg>
+      Prince Sagar
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </nav>
+
+  <main id="content" class="case">
+    <article>
+      <header class="reveal">
+        <p class="case-eyebrow">Case study · Fetch The Price</p>
+        <h1 class="case-title">Voucher Price Tracker — competitor price intelligence</h1>
+        <p class="case-lede">An end-to-end competitor price-intelligence pipeline for the gift voucher / gaming credits market (BGMI UC, Google Play, Steam keys). It answers one question at any moment: <em>which competitor is cheapest for every product I sell?</em></p>
+
+        <dl class="case-meta">
+          <div><dt>Role</dt><dd>Built solo — scraper, database schema, analytics views and scheduling</dd></div>
+          <div><dt>Timeline</dt><dd>July – September 2026</dd></div>
+          <div><dt>Status</dt><dd>Live — runs by itself every 12 hours on GitHub Actions; latest runs all succeeded</dd></div>
+          <div>
+            <dt>Links</dt>
+            <dd class="links">
+              <a href="https://github.com/sagarprince05/voucher-price-tracker" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </dd>
+          </div>
+        </dl>
+
+        <ul class="stats" aria-label="Results">
+          <li class="stat"><div class="stat-value">4</div><div class="stat-label">competitor platforms — Swag, GyFTR, 99gift, Rooter</div></li>
+          <li class="stat"><div class="stat-value">~2,200</div><div class="stat-label">products scraped and synced per run</div></li>
+          <li class="stat"><div class="stat-value">~35<small>s</small></div><div class="stat-label">for a full scrape plus database sync</div></li>
+          <li class="stat"><div class="stat-value">₹0</div><div class="stat-label">running cost — GitHub Actions free tier</div></li>
+        </ul>
+      </header>
+
+      <div class="prose reveal">
+        <h2>The problem</h2>
+        <p>Voucher pricing is hyper-competitive — discounts change daily across marketplaces, and manually checking hundreds of denominations on four different sites is impossible. To price competitively, I needed to know at any moment which competitor is cheapest for every product I sell.</p>
+
+        <h2>The solution</h2>
+        <p>A single-file Python scraper that reverse-engineers the internal APIs of four competitor platforms (Swag, GyFTR, 99gift, Rooter), normalises their very different data models — percent discounts, flat discounts, denomination-level SKUs, multi-seller listings — into one schema, and syncs everything to a Supabase Postgres database.</p>
+
+        <h2>How it works</h2>
+        <ul>
+          <li><strong>Zero-cost, serverless scheduling</strong> — runs on a GitHub Actions cron every 12 hours (about 8:30 am and 8:30 pm IST), with a manual trigger from the GitHub page; no server to maintain.</li>
+          <li><strong>Fast, polite scraping</strong> — a 16-worker thread pool with retry/backoff and request throttling completes a full scrape and database sync of ~2,200 products in about 35 seconds.</li>
+          <li><strong>Catalogue-aware filtering</strong> — only scrapes products matching my own catalogue, cutting scrape volume dramatically.</li>
+          <li><strong>Price history built in</strong> — every run bulk-upserts current prices and appends immutable snapshots, enabling price-over-time analysis.</li>
+          <li><strong>Analytics as SQL views</strong> — <code>v_my_compare</code> shows every competitor offer matching each of my products; <code>v_my_best</code> returns one row per product: the cheapest competitor price to beat.</li>
+          <li><strong>Frontend-ready security</strong> — row-level security policies and anon read grants mean any website can read live comparison data directly via the Supabase API, with the database writable only by the pipeline.</li>
+          <li><strong>Per-site adapters, one config</strong> — each competitor has its own adapter behind a common interface; everything is configured through environment variables.</li>
+        </ul>
+
+        <h2>Tech stack</h2>
+        <ul class="tags" aria-label="Technologies used">
+          <li>Python 3.11</li><li>httpx</li><li>psycopg</li><li>ThreadPoolExecutor</li><li>Supabase (Postgres)</li><li>SQL views</li><li>Row-level security</li><li>GitHub Actions cron</li>
+        </ul>
+      </div>
+
+      <footer class="case-footer">
+        <a class="inline-link" href="humyn-watcher.html">
+          <svg class="arrow arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+          Previous: Humyn Watcher
+        </a>
+        <a class="inline-link" href="../index.html#projects">
+          All projects
+          <svg class="arrow arrow-right" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>
