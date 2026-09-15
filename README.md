@@ -1,6 +1,6 @@
 # Prince Sagar — Portfolio
 
-A fast, accessible portfolio for a Forward Deployed Engineer — dark "midnight" palette (navy, blue glows, chartreuse accent, aurora gradient blocks), photo-led (hero with a cut-out portrait, serif-italic title, tech marquee, screenshot collage, "how it works" cards, results, selected works, contact). Hand-coded in HTML, CSS and vanilla JavaScript — no build step, no frameworks, no trackers.
+A fast, accessible portfolio for a Forward Deployed Engineer — dark "midnight" palette (navy, blue glows, mint accent, aurora gradient blocks), photo-led (hero with a cut-out portrait, serif-italic title, tech marquee, screenshot collage, "how it works" cards, results, selected works, contact). Hand-coded in HTML, CSS and vanilla JavaScript — no build step, no frameworks, no trackers.
 
 ## Files
 
@@ -40,7 +40,7 @@ then visit http://localhost:4173.
 | Project cards | `index.html` → `<section id="work">` — duplicate a `.work-card` |
 | Case studies | `projects/*.html` — copy one to add a new case study, then link it from a card |
 | Contact email | `index.html` → `mailto:` link, `data-email`, and the JSON-LD block in `<head>` |
-| Colours | `styles.css` → `--accent` (chartreuse), `--blue`, `--aurora` and the surface tokens in `:root` |
+| Colours | `styles.css` → `--accent` (mint), `--blue`, `--aurora` and the surface tokens in `:root` |
 
 To use a real screenshot instead of a CSS mock-up on a work card, replace the `<div class="mock">…</div>` with `<img src="assets/screenshots/….webp" alt="" width="640" height="400" loading="lazy">`.
 
