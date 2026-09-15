@@ -88,6 +88,67 @@
           <li><strong>A login-protected live dashboard</strong> with every site and recce, its status, approver and timestamps. Google Sheets remain the system of record, mirrored to Supabase.</li>
         </ul>
 
+        <h2>Walkthrough</h2>
+        <p>How a site gets cleared, in the order it actually happens — from the first form to the approver's decision. Click any screenshot to enlarge.</p>
+
+        <div class="gallery">
+          <figure class="span-2">
+            <a class="shot" href="../assets/screenshots/so-08-flowchart.webp">
+              <img src="../assets/screenshots/so-08-flowchart.webp" alt="Flow diagram titled 'How a Site Gets Cleared' with three lanes — site person, automatic system, approvers — across two passes: Site Identification and Site Recce" width="900" height="1290" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>The whole system on one page.</strong> Three lanes — what the site person does, what runs automatically, and what approvers do — across the Site Identification and Site Recce passes. Green lines are the emails each step sends. This diagram was the shared spec every stakeholder signed off before rollout.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-01-site-id-form.webp">
+              <img src="../assets/screenshots/so-01-site-id-form.webp" alt="Site Identification Form on site-id.humynlabs.ai with operator, SPOC email, site name, site type, country and state fields" width="1280" height="900" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>1 · Site Identification form.</strong> Branded, mobile-first, on the company's own domain. Every field, label and dropdown comes from a configuration sheet.</figcaption>
+          </figure>
+
+          <figure class="fit-left">
+            <a class="shot" href="../assets/screenshots/so-02-site-approved-email.webp">
+              <img src="../assets/screenshots/so-02-site-approved-email.webp" alt="Approval email showing 'Your Site ID: HL042' and a link to the Site Recce form" width="760" height="420" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>2 · Site approved, Site ID issued.</strong> The submitter receives their sequential ID (HL042) and the link to the next stage — nobody else can see it.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-03-recce-form.webp">
+              <img src="../assets/screenshots/so-03-recce-form.webp" alt="Site Recce Form with a 'Site ID verified: HL042' banner and the site name and email pre-filled and locked" width="1280" height="900" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>3 · Site Recce form.</strong> Opens only with a valid Site ID, then auto-fills and locks the site's details from its own record — so names can never drift between stages.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-04-review-request-email.webp">
+              <img src="../assets/screenshots/so-04-review-request-email.webp" alt="Review request email for REC-0042 addressed to Priya, listing site details and three tasks, with a 'Review request' button" width="820" height="640" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>4 · Review request.</strong> Approvers get a personal, signed button. Whoever answers first settles it; a forwarded or altered link is refused.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-05-review-page.webp">
+              <img src="../assets/screenshots/so-05-review-page.webp" alt="Review page for REC-0042 showing site details, three tasks with skill level and photo/video thumbnails, two tasks ticked, and Confirm Approve, Reject Site and Cancel buttons" width="760" height="1380" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>5 · Task-level review page.</strong> One row per task with skill level and media that plays in place. Tick what you approve; Reject is only available while nothing is ticked, so an invalid decision can't be recorded.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-06-decision-recorded.webp">
+              <img src="../assets/screenshots/so-06-decision-recorded.webp" alt="Confirmation screen: 'REC-0042 is approved — it is saved in the sheet, the dashboard is updated, and the other reviewer has been told'" width="760" height="520" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>6 · Decision recorded.</strong> Written back to the sheet, mirrored to Supabase, dashboard updated, and every stakeholder emailed — in one click.</figcaption>
+          </figure>
+
+          <figure>
+            <a class="shot" href="../assets/screenshots/so-07-dashboard-sign-in.webp">
+              <img src="../assets/screenshots/so-07-dashboard-sign-in.webp" alt="Site Approvals dashboard sign-in page with Login ID and Password fields" width="1280" height="800" loading="lazy" decoding="async">
+            </a>
+            <figcaption><strong>7 · Live dashboard.</strong> Login-protected view of every site and recce with status, approver and timestamps. Reachable only by its address — dashboard links were removed from all emails.</figcaption>
+          </figure>
+        </div>
+
         <h2>Highlights</h2>
         <ul>
           <li><strong>Sample-before-deploy discipline:</strong> every change was previewed as a working sample and approved by stakeholders before going live, and every release was verified automatically and then on the live system.</li>
@@ -120,6 +181,11 @@
       </footer>
     </article>
   </main>
+
+  <dialog class="lightbox" aria-label="Enlarged screenshot">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </dialog>
 
   <script src="../script.js" defer></script>
 </body>

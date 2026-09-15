@@ -71,6 +71,23 @@
         <h2>Overview</h2>
         <p>Anyone on the team can @mention the bot or DM it a question like <em>"how many Akai cameras do we have?"</em> or <em>"top 3 most active operators this week"</em> — even with spelling mistakes or mixed Hindi-English — and the bot writes the SQL, queries the company's Postgres database in real time, and replies in the Slack thread with the answer plus a receipt showing exactly what it searched.</p>
 
+        <h2>In action</h2>
+        <p>Two real exchanges from the team's Slack. Click to enlarge.</p>
+
+        <figure class="figure">
+          <a class="shot" href="../assets/screenshots/hw-01-sql-receipt.webp">
+            <img src="../assets/screenshots/hw-01-sql-receipt.webp" alt="Slack thread: Prince asks '@Humyn Watcher how many total akai camera'; the bot replies '18' followed by the SQL it ran: SELECT COUNT(*) FROM bot.assets WHERE kind = 'camera' AND (model ILIKE '%akai%' OR variant ILIKE '%akai%')" width="1300" height="260" loading="lazy" decoding="async">
+          </a>
+          <figcaption><strong>A clean hit, with a receipt.</strong> The answer is a deterministic count — it never passes through the language model — and the exact query is shown underneath so anyone can verify what was checked.</figcaption>
+        </figure>
+
+        <figure class="figure">
+          <a class="shot" href="../assets/screenshots/hw-02-fuzzy-question.webp">
+            <img src="../assets/screenshots/hw-02-fuzzy-question.webp" alt="Slack thread: Prince asks '@Humyn Watcher how many akai camera mount?'; the bot replies 'Nothing matched your exact wording — showing the closest interpretation: 16, live at 14:05 IST'" width="1300" height="490" loading="lazy" decoding="async">
+          </a>
+          <figcaption><strong>A fuzzy question, handled honestly.</strong> "Camera mount" isn't a value in the database, so the bot says nothing matched the exact wording, reinterprets once, answers with the closest match and stamps the answer with the live time — rather than silently guessing.</figcaption>
+        </figure>
+
         <h2>The problem</h2>
         <p>Operations data (projects, workers, assets, task events) lived in a Postgres database that only technical people could query. Everyone else had to ask around or wait. The goal: instant self-serve answers inside Slack, with strict accuracy — the bot must never invent data — and a hard constraint of zero budget (free tiers only).</p>
 
@@ -129,6 +146,11 @@
       </footer>
     </article>
   </main>
+
+  <dialog class="lightbox" aria-label="Enlarged screenshot">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <img alt="">
+  </dialog>
 
   <script src="../script.js" defer></script>
 </body>
