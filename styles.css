@@ -172,62 +172,71 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .hero-card {
   position: relative;
   overflow: hidden;
+  display: grid;
+  gap: 2rem;
+  padding: 2rem 1.5rem 1.5rem;
   border-radius: var(--radius-xl);
   background:
-    radial-gradient(55% 48% at 50% 66%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 65%),
-    linear-gradient(180deg, #d3ff66 0%, var(--lime) 50%, #e5ffa6 82%, #f3ffd9 100%);
-  padding: 2rem 1.25rem 0;
-  text-align: center;
+    radial-gradient(60% 70% at 85% 20%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(135deg, #d8ff74 0%, var(--lime) 55%, #dcff8a 100%);
 }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.35rem 0.8rem 0.35rem 0.5rem; font-size: 0.8rem; font-weight: 500; color: var(--ink);
-  background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 999px;
-}
-.hero-badge .mark {
-  width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--ink); color: var(--lime);
-  display: grid; place-items: center; font-family: var(--font-serif); font-style: italic; font-size: 0.95rem;
-}
-.hero-title { margin-top: 1.25rem; color: var(--ink); line-height: 0.98; }
-.hero-title .line1 {
-  display: block; font-size: clamp(2.4rem, 7.2vw, 5.25rem); font-weight: 600; letter-spacing: -0.035em;
-}
+.hero-copy { display: grid; gap: 1.25rem; justify-items: start; max-width: 36rem; }
+.hero-title { color: var(--ink); line-height: 0.98; }
+.hero-title .line1 { display: block; font-size: clamp(2.2rem, 4.8vw, 3.6rem); font-weight: 600; letter-spacing: -0.035em; }
 .hero-title .line2 {
-  display: block; font-family: var(--font-serif); font-style: italic; font-weight: 400;
-  font-size: clamp(2.6rem, 8.2vw, 6.25rem); letter-spacing: -0.02em; margin-top: 0.05em;
+  display: block; margin-top: 0.06em;
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: clamp(2.5rem, 5.8vw, 4.6rem); letter-spacing: -0.02em;
 }
-.hero-photo {
-  position: relative; z-index: 2;
-  width: min(74%, 30rem); margin: -1.5rem auto 0;
-}
-.hero-photo img {
-  width: 100%; height: auto;
-  filter: grayscale(1) contrast(1.04);   /* remove this line for a colour photo */
-  -webkit-mask-image: linear-gradient(180deg, #000 88%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 88%, transparent 100%);
-}
-.hero-side { display: grid; gap: 1rem; padding: 1.25rem 0 2rem; text-align: left; }
-.hero-blurb { max-width: 20rem; font-size: 1rem; line-height: 1.55; color: rgba(13, 17, 16, 0.78); }
-.hero-proof { display: flex; align-items: center; gap: 0.75rem; max-width: 20rem; font-size: 0.85rem; line-height: 1.4; color: rgba(13, 17, 16, 0.78); }
+.hero-blurb { max-width: 30rem; font-size: 1.05rem; line-height: 1.6; color: rgba(13, 17, 16, 0.78); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.hero-proof { display: flex; align-items: center; gap: 0.75rem; max-width: 26rem; margin-top: 0.25rem; font-size: 0.85rem; line-height: 1.45; color: rgba(13, 17, 16, 0.75); }
 .hero-proof strong { color: var(--ink); font-weight: 600; }
-.hero-proof .stack { display: flex; }
+.hero-proof .stack { display: flex; flex-shrink: 0; }
 .hero-proof .stack span {
-  width: 1.9rem; height: 1.9rem; border-radius: 999px; border: 2px solid #f0ffc7; margin-left: -0.5rem;
+  width: 1.9rem; height: 1.9rem; border-radius: 999px; border: 2px solid #eaffb0; margin-left: -0.5rem;
   display: grid; place-items: center; font-size: 0.65rem; font-weight: 700; color: #fff;
 }
 .hero-proof .stack span:first-child { margin-left: 0; }
 
+.hero-visual { display: flex; justify-content: center; align-items: end; }
+.portrait {
+  position: relative;
+  width: min(100%, 18rem);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(70% 55% at 50% 42%, #ffffff 0%, rgba(255, 255, 255, 0.35) 55%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, #edffb9 0%, #b9f53a 100%);
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+.portrait img {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  width: 100%; height: auto;
+  filter: grayscale(1) contrast(1.04);   /* remove this line for a colour photo */
+}
+.portrait-tag {
+  position: absolute; left: 0.85rem; bottom: 0.85rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.4rem; font-size: 0.75rem; font-weight: 600; color: var(--ink);
+  background: rgba(255, 255, 255, 0.92); border-radius: 999px; box-shadow: var(--shadow-sm);
+}
+.portrait-tag .mark {
+  width: 1.4rem; height: 1.4rem; border-radius: 999px; background: var(--ink); color: var(--lime);
+  display: grid; place-items: center; font-family: var(--font-serif); font-style: italic; font-size: 0.9rem;
+}
+
 @media (min-width: 900px) {
-  .hero-card { padding: 2.25rem 3rem 0; min-height: 40rem; }
-  .hero-title { margin-top: 1.5rem; }
-  .hero-photo { width: 31rem; margin-top: -2.4rem; }
-  /* Four anchored items around the photo: pill + proof on the left, blurb + button on the right */
-  .hero-side { position: absolute; inset: 0; display: block; padding: 0; pointer-events: none; }
-  .hero-side > * > * { pointer-events: auto; }
-  .hero-left .pill { position: absolute; left: 3rem; top: 49%; }
-  .hero-proof { position: absolute; left: 3rem; bottom: 2.75rem; max-width: 18rem; }
-  .hero-right .hero-blurb { position: absolute; right: 3rem; top: 47%; width: 18.5rem; text-align: left; }
-  .hero-right .btn { position: absolute; right: 3rem; bottom: 2.75rem; }
+  .hero-card {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: 3rem;
+    padding: 3.5rem 3.5rem;
+    min-height: 34rem;
+  }
+  .hero-visual { justify-content: flex-end; }
+  .portrait { width: min(100%, 22rem); }
 }
 
 /* ---------- Marquee ---------- */
