@@ -7,7 +7,7 @@ Design is inspired by the best-in-class portfolios of Brittany Chiang (sticky si
 ## Files
 
 ```
-index.html                       Home: about, experience, projects, skills, contact
+index.html                       Home: about, experience, projects, skills, education, contact
 projects/
   site-onboarding.html           Case study — Site Onboarding & Approval Automation
   humyn-watcher.html             Case study — Humyn Watcher (AI Slack assistant)
@@ -16,7 +16,7 @@ styles.css                       Design tokens (:root) + layout + case-study sty
 script.js                        Theme toggle, spotlight, active nav, scroll reveal, copy email
 assets/
   favicon.svg                    "P" mark — change the letter/colours here
-  resume.pdf                     ADD: your résumé (linked from the Experience section)
+  resume.pdf                     Résumé (linked from the Experience section)
   og.png                         ADD: 1200×630 social preview image (referenced in <head>)
 ```
 
@@ -60,7 +60,7 @@ To use a real screenshot instead of the gradient thumbnail on a card:
 
 ## Before going live
 
-- [ ] Add `assets/resume.pdf`
+- [x] Add `assets/resume.pdf`
 - [ ] Add `assets/og.png` (1200×630) — a screenshot of the hero works well
 - [ ] Optionally replace gradient thumbnails with real screenshots
 - [ ] Run Lighthouse in Chrome DevTools (Performance / Accessibility / Best Practices / SEO)
