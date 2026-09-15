@@ -1,80 +1,66 @@
-"""Generate assets/og.png (1200x630) matching the portfolio's dark theme."""
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+"""Generate assets/og.png (1200x630) in the site's lime style, with the photo cutout.
+Run:  python tools/make_og.py   (after tools/make_photo.py)"""
+import os
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
 
 W, H = 1200, 630
-OUT = r"C:\Users\Prince\Desktop\project\Portfolio Websites\assets\og.png"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, "assets", "og.png")
+PHOTO = os.path.join(ROOT, "assets", "prince.webp")
 FONTS = r"C:\Windows\Fonts"
 
-BG = (15, 23, 42)          # slate-900
-HEADING = (241, 245, 249)  # slate-100
-STRONG = (226, 232, 240)   # slate-200
-TEXT = (148, 163, 184)     # slate-400
-ACCENT = (94, 234, 212)    # teal-300
-CHIP_BG = (25, 60, 70)     # teal @ ~10% over bg
-BORDER = (38, 48, 70)
-
+LIME, LIME_2, INK, MUTED = (201, 255, 79), (214, 255, 110), (13, 17, 16), (60, 68, 64)
 bold = lambda s: ImageFont.truetype(f"{FONTS}\\segoeuib.ttf", s)
 reg = lambda s: ImageFont.truetype(f"{FONTS}\\segoeui.ttf", s)
-mono = lambda s: ImageFont.truetype(f"{FONTS}\\consola.ttf", s)
+serif_i = lambda s: ImageFont.truetype(f"{FONTS}\\georgiai.ttf", s)
 
-img = Image.new("RGB", (W, H), BG)
-
-# Soft blue-teal glow (echoes the cursor spotlight) — drawn on a separate layer and blurred
-glow = Image.new("RGB", (W, H), BG)
+# Background: lime with a white glow behind the photo
+img = Image.new("RGB", (W, H), LIME)
+glow = Image.new("RGB", (W, H), LIME)
 g = ImageDraw.Draw(glow)
-g.ellipse((700, -250, 1500, 450), fill=(29, 78, 216))
-glow = glow.filter(ImageFilter.GaussianBlur(160))
-img = Image.blend(img, glow, 0.35)
+g.ellipse((640, 60, 1240, 700), fill=(255, 255, 255))
+glow = glow.filter(ImageFilter.GaussianBlur(120))
+img = Image.blend(img, glow, 0.55)
+
+# Photo cutout, grayscale, anchored bottom-right
+photo = Image.open(PHOTO).convert("RGBA")
+ph = 600
+photo = photo.resize((round(photo.width * ph / photo.height), ph), Image.LANCZOS)
+gray = ImageOps.grayscale(photo).convert("RGBA"); gray.putalpha(photo.getchannel("A"))
+img = img.convert("RGBA")
+img.alpha_composite(gray, (W - gray.width - 40, H - gray.height))
+img = img.convert("RGB")
 
 d = ImageDraw.Draw(img)
-PAD = 80
+PAD = 72
 
-# Eyebrow (mono, letter-spaced, accent)
-eyebrow = "sagarprince05.github.io  ·  portfolio"
-d.text((PAD, 78), eyebrow, font=mono(18), fill=ACCENT)
+# Badge
+badge = "Forward Deployed Engineer  ·  KGeN"
+bf = reg(20); bw = d.textlength(badge, font=bf)
+d.rounded_rectangle((PAD, 70, PAD + bw + 36, 70 + 40), radius=20, fill=(255, 255, 255, 200), outline=(255, 255, 255))
+d.text((PAD + 18, 77), badge, font=bf, fill=INK)
 
-# Name + title
-d.text((PAD - 4, 118), "Prince Sagar", font=bold(96), fill=HEADING)
-d.text((PAD, 238), "AI Deployment Engineer", font=reg(40), fill=STRONG)
+# Headline
+d.text((PAD - 4, 138), "Hi, I'm Prince", font=bold(84), fill=INK)
+d.text((PAD - 2, 236), "Forward Deployed", font=serif_i(76), fill=INK)
+d.text((PAD - 2, 318), "Engineer", font=serif_i(76), fill=INK)
 
-# Tagline, wrapped
-tag_font = reg(28)
-tagline = ("AI assistants, automations and data pipelines that run 24/7 in "
-           "production — on infrastructure that costs nothing.")
-words, lines, cur = tagline.split(), [], ""
+# Blurb (wrapped to the left 55%)
+tf = reg(24)
+blurb = ("I go close to the real problem, build the solution, deploy it into "
+         "your environment, and make sure it actually works.")
+words, lines, cur = blurb.split(), [], ""
 for w in words:
     t = (cur + " " + w).strip()
-    if d.textlength(t, font=tag_font) > W - 2 * PAD - 260:
-        lines.append(cur); cur = w
-    else:
-        cur = t
+    if d.textlength(t, font=tf) > 560: lines.append(cur); cur = w
+    else: cur = t
 lines.append(cur)
-y = 312
+y = 440
 for ln in lines:
-    d.text((PAD, y), ln, font=tag_font, fill=TEXT)
-    y += 40
+    d.text((PAD, y), ln, font=tf, fill=MUTED); y += 33
 
-# Tag chips
-chips = ["Python", "Claude Code", "Cloudflare Workers", "Supabase", "Google Apps Script", "Slack & Telegram bots"]
-cf = mono(18)
-x, cy = PAD, 470
-for c in chips:
-    tw = d.textlength(c, font=cf)
-    d.rounded_rectangle((x, cy, x + tw + 28, cy + 36), radius=18, fill=CHIP_BG)
-    d.text((x + 14, cy + 8), c, font=cf, fill=ACCENT)
-    x += tw + 28 + 12
-
-# Footer line + status
-d.line((PAD, 548, W - PAD, 548), fill=BORDER, width=1)
-d.ellipse((PAD, 573, PAD + 12, 585), fill=ACCENT)
-d.text((PAD + 22, 566), "Software Developer Intern · Kratos Gaming Network (KGeN)", font=reg(20), fill=TEXT)
-
-# "P" mark bottom-right (matches favicon.svg)
-mx, my, ms = W - PAD - 64, 556, 64
-d.rounded_rectangle((mx, my, mx + ms, my + ms), radius=14, fill=(11, 18, 34), outline=ACCENT, width=2)
-pf = bold(34)
-pw = d.textlength("P", font=pf)
-d.text((mx + (ms - pw) / 2, my + 10), "P", font=pf, fill=ACCENT)
+# URL
+d.text((PAD, 566), "sagarprince05.github.io", font=bold(20), fill=INK)
 
 img.save(OUT, "PNG", optimize=True)
-print("wrote", OUT, img.size)
+print("wrote", OUT, img.size, round(os.path.getsize(OUT) / 1024), "KB")

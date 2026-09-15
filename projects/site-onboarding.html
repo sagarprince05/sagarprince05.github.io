@@ -6,8 +6,7 @@
   <title>Site Onboarding &amp; Approval Automation — Prince Sagar</title>
   <meta name="description" content="Case study: an end-to-end site onboarding and approval system for Humyn Labs — branded web forms, automatic Site IDs, one-click signed approvals, a media review page, stakeholder notifications and a live dashboard. 63 sites onboarded, 143 tasks reviewed.">
   <meta name="author" content="Prince Sagar">
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#c9ff4f">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Site Onboarding &amp; Approval Automation — case study">
   <meta property="og:description" content="Replaced spreadsheets and email chasing with branded forms, one-click approvals and a live dashboard. Live in production at Humyn Labs.">
@@ -18,32 +17,37 @@
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  <script>
-    (function () {
-      try {
-        var saved = localStorage.getItem('theme');
-        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-        document.documentElement.setAttribute('data-theme', saved || (prefersLight ? 'light' : 'dark'));
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
-    })();
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
-  <div class="spotlight" aria-hidden="true"></div>
-
-  <nav class="case-nav" aria-label="Site">
-    <a class="brand" href="../index.html#projects">
-      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10z" clip-rule="evenodd"/></svg>
-      Prince Sagar
-    </a>
-    <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-    </button>
-  </nav>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="../index.html">Prince Sagar</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#process">Process</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-dark" href="mailto:prince.nbt05@gmail.com">Get in touch</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="container nav-panel" id="nav-panel" aria-label="Mobile">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#process">Process</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#background">Background</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
 
   <main id="content" class="case">
     <article>
@@ -170,7 +174,7 @@
       </div>
 
       <footer class="case-footer">
-        <a class="inline-link" href="../index.html#projects">
+        <a class="inline-link" href="../index.html#work">
           <svg class="arrow arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
           All projects
         </a>

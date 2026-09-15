@@ -1,50 +1,43 @@
 /* ==========================================================================
    Portfolio — script.js
    Small, dependency-free enhancements:
-     1. Light / dark theme toggle (persisted)
-     2. Cursor spotlight (desktop only)
-     3. Active nav link that follows scroll position
-     4. Scroll-reveal for sections
-     5. Copy-email button + footer year
+     1. Mobile nav toggle + header shadow on scroll
+     2. Active nav link that follows scroll position
+     3. Scroll-reveal for sections
+     4. Copy-email button + footer year
+     5. Screenshot lightbox (case-study pages)
    Everything degrades gracefully if JS is disabled.
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- 1. Theme toggle ---------- */
-  var toggle = document.querySelector('.theme-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) { /* private mode etc. */ }
+  /* ---------- 1. Header: mobile menu + scrolled state ---------- */
+  var header = document.querySelector('.site-header');
+  var navToggle = document.querySelector('.nav-toggle');
+  if (header && navToggle) {
+    navToggle.addEventListener('click', function () {
+      var open = header.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    // Close the panel after choosing a destination
+    Array.prototype.forEach.call(header.querySelectorAll('.nav-panel a'), function (a) {
+      a.addEventListener('click', function () {
+        header.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
-
-  /* ---------- 2. Cursor spotlight ---------- */
-  var spotlight = document.querySelector('.spotlight');
-  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (spotlight && canHover && !reduceMotion) {
-    var raf = null;
-    var lastX = 0;
-    var lastY = 0;
-    window.addEventListener('mousemove', function (e) {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      if (raf) return;
-      raf = window.requestAnimationFrame(function () {
-        spotlight.style.setProperty('--x', lastX + 'px');
-        spotlight.style.setProperty('--y', lastY + 'px');
-        raf = null;
-      });
-    }, { passive: true });
+  if (header) {
+    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* ---------- 3. Active nav on scroll ---------- */
+  /* ---------- 2. Active nav on scroll ---------- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
   var sections = navLinks
     .map(function (link) { return document.querySelector(link.getAttribute('href')); })
@@ -65,25 +58,17 @@
       entries.forEach(function (entry) {
         visible[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0;
       });
-      // Pick the section with the largest visible area; fall back to the first in DOM order
-      var best = null;
-      var bestRatio = 0;
+      var best = null, bestRatio = 0;
       sections.forEach(function (s) {
         if (visible[s.id] > bestRatio) { best = s.id; bestRatio = visible[s.id]; }
       });
       if (best) setActive(best);
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
-
+      else if (window.scrollY < 200) setActive('');
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
     sections.forEach(function (s) { navObserver.observe(s); });
-
-    // Mark the last section active when the page is scrolled to the bottom
-    window.addEventListener('scroll', function () {
-      var atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 2;
-      if (atBottom) setActive(sections[sections.length - 1].id);
-    }, { passive: true });
   }
 
-  /* ---------- 4. Scroll reveal ---------- */
+  /* ---------- 3. Scroll reveal ---------- */
   var reveals = document.querySelectorAll('.reveal');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-visible'); });
@@ -95,11 +80,11 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.02 });
     Array.prototype.forEach.call(reveals, function (el) { revealObserver.observe(el); });
   }
 
-  /* ---------- 5. Copy email + footer year ---------- */
+  /* ---------- 4. Copy email + footer year ---------- */
   var copyBtn = document.querySelector('.copy-email');
   if (copyBtn) {
     var label = copyBtn.querySelector('.copy-label');
@@ -127,7 +112,7 @@
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* ---------- 6. Screenshot lightbox (case-study pages) ---------- */
+  /* ---------- 5. Screenshot lightbox (case-study pages) ---------- */
   var lightbox = document.querySelector('.lightbox');
   if (lightbox && typeof lightbox.showModal === 'function') {
     var lbImg = lightbox.querySelector('img');
@@ -145,14 +130,9 @@
       });
     });
 
-    // Close on the X, on backdrop click, or Esc (native)
     if (lbClose) lbClose.addEventListener('click', function () { lightbox.close(); });
-    lightbox.addEventListener('click', function (e) {
-      if (e.target === lightbox) lightbox.close();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && lightbox.open) lightbox.close();
-    });
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) lightbox.close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lightbox.open) lightbox.close(); });
     lightbox.addEventListener('close', function () {
       lbImg.removeAttribute('src');
       if (lastTrigger) lastTrigger.focus();
