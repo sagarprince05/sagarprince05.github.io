@@ -35,27 +35,28 @@ d = ImageDraw.Draw(img)
 PAD = 72
 
 # Badge
-badge = "Software Engineer  ·  AI & Automation"
+badge = "AI  ·  Automation  ·  Full-stack"
 bf = reg(20); bw = d.textlength(badge, font=bf)
 d.rounded_rectangle((PAD, 70, PAD + bw + 36, 70 + 40), radius=20, fill=(20, 28, 44), outline=(60, 72, 96))
 d.text((PAD + 18, 77), badge, font=bf, fill=INK)
 
 # Headline
 d.text((PAD - 4, 138), "Hi, I'm Prince", font=bold(84), fill=INK)
-d.text((PAD - 2, 240), "Software Engineer", font=serif_i(72), fill=GOLD)
+d.text((PAD - 2, 236), "Forward Deployed", font=serif_i(76), fill=GOLD)
+d.text((PAD - 2, 318), "Engineer", font=serif_i(76), fill=GOLD)
 
 
 # Blurb (wrapped to the left 55%)
 tf = reg(24)
-blurb = ("I build AI-powered apps, APIs and automation with Python, JavaScript, "
-         "React Native and Next.js - and ship them to production.")
+blurb = ("I go close to the real problem, build the solution, deploy it into "
+         "your environment, and make sure it actually works.")
 words, lines, cur = blurb.split(), [], ""
 for w in words:
     t = (cur + " " + w).strip()
     if d.textlength(t, font=tf) > 560: lines.append(cur); cur = w
     else: cur = t
 lines.append(cur)
-y = 400
+y = 440
 for ln in lines:
     d.text((PAD, y), ln, font=tf, fill=MUTED); y += 33
 
