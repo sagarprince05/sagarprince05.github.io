@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Data Assistant (Slack Bot) — Prince Sagar</title>
+  <meta name="description" content="A chat assistant that turns plain-English questions into live database queries and returns verified answers in about three seconds — built with LLM APIs, PostgreSQL and a serverless backend.">
+  <meta name="author" content="Prince Sagar">
+  <meta name="theme-color" content="#07090f">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Data Assistant (Slack Bot) — Prince Sagar">
+  <meta property="og:description" content="Plain-English questions → verified database answers in ~3 seconds, running 24/7 on a free serverless stack.">
+  <meta property="og:url" content="https://sagarprince05.github.io/projects/ai-data-assistant.html">
+  <meta property="og:image" content="https://sagarprince05.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://sagarprince05.github.io/projects/ai-data-assistant.html">
+  <link rel="icon" href="../assets/favicon.svg?v=20260928" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260928">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="../index.html">Prince Sagar</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#work">Projects</a>
+        <a href="../index.html#background">Experience</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-dark" href="mailto:prince.nbt05@gmail.com">Get in touch</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="container nav-panel" id="nav-panel" aria-label="Mobile">
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#work">Projects</a>
+      <a href="../index.html#background">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="content" class="case">
+    <article>
+      <header class="reveal">
+        <p class="case-eyebrow">Project · Internship</p>
+        <h1 class="case-title">AI Data Assistant (Slack Bot)</h1>
+        <p class="case-lede">A chat assistant that lets a non-technical team ask questions about live operational data in plain English — including typos and mixed Hindi-English — and get an accurate, verified answer in about three seconds.</p>
+
+        <dl class="case-meta">
+          <div><dt>My role</dt><dd>Sole developer — designed, built and deployed it end-to-end</dd></div>
+          <div><dt>Context</dt><dd>Software developer internship</dd></div>
+          <div><dt>Status</dt><dd>Running in production, used daily</dd></div>
+          <div><dt>Constraint</dt><dd>Free-tier services only — zero infrastructure budget</dd></div>
+        </dl>
+
+        <ul class="stats" aria-label="Highlights">
+          <li class="stat"><div class="stat-value">~3<small>s</small></div><div class="stat-label">median answer time, end to end</div></li>
+          <li class="stat"><div class="stat-value">24/7</div><div class="stat-label">serverless — no server to maintain</div></li>
+          <li class="stat"><div class="stat-value">₹0</div><div class="stat-label">monthly infrastructure cost</div></li>
+          <li class="stat"><div class="stat-value">0</div><div class="stat-label">fabricated answers — every reply is query-backed</div></li>
+        </ul>
+      </header>
+
+      <div class="prose reveal">
+        <h2>The problem</h2>
+        <p>Operational data sat in a database only technical people could query, so everyone else had to ask around and wait. The goal was instant self-serve answers in the tool the team already used, with a hard rule that the assistant must never invent data — and no budget for infrastructure.</p>
+
+        <h2>What I built</h2>
+        <ul>
+          <li><strong>Natural language → SQL.</strong> An LLM converts each question into a read-only query, guided by a hand-written data dictionary that captures the schema's quirks and the team's vocabulary.</li>
+          <li><strong>Anti-hallucination design.</strong> Answers come only from real query results, and every reply carries a receipt of what was searched. Single-value answers bypass the language model entirely so a number can never be garbled. If the database is unreachable, the assistant says so instead of guessing.</li>
+          <li><strong>Resilience on free tiers.</strong> A fallback chain across multiple models plus a queue for burst traffic kept it answering when any one model hit a rate limit — including when a provider retired two models without notice.</li>
+          <li><strong>Security by design.</strong> Request signature verification, an admin-managed allowlist, and a dedicated read-only database role scoped to a single schema with a statement timeout, so the assistant cannot modify or reach data outside its scope.</li>
+          <li><strong>Self-updating.</strong> A scheduled job refreshes the assistant's picture of the schema automatically, so new data appears without a redeploy. Admins can also teach it new terms from chat.</li>
+        </ul>
+
+        <h2>Engineering challenges</h2>
+        <ul>
+          <li>Direct database connections from edge functions hit platform subrequest limits — solved with a connection-pooling layer after diagnosing a double-pooling conflict.</li>
+          <li>Early versions could produce a confident answer when the data path failed; I replaced that with layered guards that fail honestly and show their working.</li>
+          <li>Timezone handling and messy free-text data produced wrong answers until I captured each case as a rule in a living data dictionary.</li>
+        </ul>
+
+        <h2>Technologies</h2>
+        <ul class="tags" aria-label="Technologies used">
+          <li>JavaScript</li><li>Serverless edge functions</li><li>PostgreSQL</li><li>Supabase</li><li>Groq API (LLM)</li><li>Gemini API</li><li>Slack API</li><li>Key-value cache</li><li>Cron jobs</li>
+        </ul>
+
+        <p style="margin-top:1.5rem"><em>Built during an internship. Implementation details, internal data and screenshots are omitted; happy to talk through the architecture in an interview.</em></p>
+      </div>
+
+      <footer class="case-footer">
+        <a class="inline-link" href="../index.html#work">
+          <svg class="arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+          All projects
+        </a>
+        <a class="inline-link" href="approval-automation.html">
+          Next: Approval Workflow Automation
+          <svg class="arrow-right" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <script src="../script.js?v=20260928" defer></script>
+</body>
+</html>

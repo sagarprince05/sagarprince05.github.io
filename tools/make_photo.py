@@ -7,7 +7,7 @@ Run:  python tools/make_photo.py
 import os
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
-SRC = r"C:\Users\Prince\Pictures\WhatsApp Image 2026-09-08 at 2.33.52 AM.jpeg"
+SRC = os.environ.get("PORTRAIT_SRC", "portrait-source.jpg")  # set PORTRAIT_SRC to your photo
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "assets", "prince.webp")
 THRESH = 150         # summed RGB distance tolerated while flood-filling the wall (skin is ~300 away)

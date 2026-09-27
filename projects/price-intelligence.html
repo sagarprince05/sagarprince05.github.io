@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Intelligence Pipeline — Prince Sagar</title>
+  <meta name="description" content="A scheduled Python pipeline that collects product prices from several marketplaces, normalises them into one schema and stores full price history in PostgreSQL.">
+  <meta name="author" content="Prince Sagar">
+  <meta name="theme-color" content="#07090f">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Price Intelligence Pipeline — Prince Sagar">
+  <meta property="og:description" content="Multi-source price collection, normalised into one schema with full history — a full run in about 35 seconds, twice a day, at zero cost.">
+  <meta property="og:url" content="https://sagarprince05.github.io/projects/price-intelligence.html">
+  <meta property="og:image" content="https://sagarprince05.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://sagarprince05.github.io/projects/price-intelligence.html">
+  <link rel="icon" href="../assets/favicon.svg?v=20260928" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260928">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="../index.html">Prince Sagar</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#work">Projects</a>
+        <a href="../index.html#background">Experience</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-dark" href="mailto:prince.nbt05@gmail.com">Get in touch</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="container nav-panel" id="nav-panel" aria-label="Mobile">
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#work">Projects</a>
+      <a href="../index.html#background">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="content" class="case">
+    <article>
+      <header class="reveal">
+        <p class="case-eyebrow">Project · Internship</p>
+        <h1 class="case-title">Price Intelligence Pipeline</h1>
+        <p class="case-lede">A scheduled Python pipeline that collects product prices from several online marketplaces, normalises very different pricing models into one schema, and stores current prices plus full history in PostgreSQL.</p>
+
+        <dl class="case-meta">
+          <div><dt>My role</dt><dd>Built solo — scraper, database schema, analytics views and scheduling</dd></div>
+          <div><dt>Context</dt><dd>Software developer internship</dd></div>
+          <div><dt>Status</dt><dd>Running on a schedule, twice a day</dd></div>
+          <div><dt>Cost</dt><dd>₹0 — runs entirely on free CI minutes</dd></div>
+        </dl>
+
+        <ul class="stats" aria-label="Highlights">
+          <li class="stat"><div class="stat-value">~35<small>s</small></div><div class="stat-label">for a full collection run plus database sync</div></li>
+          <li class="stat"><div class="stat-value">16</div><div class="stat-label">parallel workers with retry and backoff</div></li>
+          <li class="stat"><div class="stat-value">12<small>h</small></div><div class="stat-label">automatic schedule, no server required</div></li>
+          <li class="stat"><div class="stat-value">₹0</div><div class="stat-label">running cost</div></li>
+        </ul>
+      </header>
+
+      <div class="prose reveal">
+        <h2>The problem</h2>
+        <p>Prices in this market change daily across several marketplaces, and checking hundreds of product variants by hand is impossible. The team needed to know, at any moment, the best price currently available for each product they sell.</p>
+
+        <h2>What I built</h2>
+        <ul>
+          <li><strong>A single-file Python collector</strong> with one adapter per source behind a common interface, so a new source is a small, isolated addition.</li>
+          <li><strong>Schema normalisation</strong> — percent discounts, flat discounts, denomination-level variants and multi-seller listings all reduced to one consistent shape.</li>
+          <li><strong>Fast, polite collection.</strong> A 16-worker thread pool with retry, backoff and request throttling completes a full run in about 35 seconds.</li>
+          <li><strong>Price history built in.</strong> Each run upserts current prices and appends an immutable snapshot, which makes price-over-time analysis possible.</li>
+          <li><strong>Analytics as SQL views</strong> so the answer to "what do we need to beat?" is a single query rather than a script.</li>
+          <li><strong>Zero-cost scheduling</strong> on a CI cron every 12 hours, with a manual trigger — no server to maintain.</li>
+          <li><strong>Read-only API access</strong> via row-level security policies, so a frontend can read live comparison data while only the pipeline can write.</li>
+        </ul>
+
+        <h2>Technologies</h2>
+        <ul class="tags" aria-label="Technologies used">
+          <li>Python 3.11</li><li>httpx</li><li>psycopg</li><li>ThreadPoolExecutor</li><li>PostgreSQL</li><li>Supabase</li><li>SQL views</li><li>Row-level security</li><li>GitHub Actions</li>
+        </ul>
+
+        <p style="margin-top:1.5rem"><em>Built during an internship. Data sources, business figures and the repository are omitted; happy to walk through the architecture in an interview.</em></p>
+      </div>
+
+      <footer class="case-footer">
+        <a class="inline-link" href="approval-automation.html">
+          <svg class="arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+          Previous: Approval Workflow Automation
+        </a>
+        <a class="inline-link" href="../index.html#work">
+          All projects
+          <svg class="arrow-right" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <script src="../script.js?v=20260928" defer></script>
+</body>
+</html>

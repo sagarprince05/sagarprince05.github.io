@@ -5,7 +5,6 @@
      2. Active nav link that follows scroll position
      3. Scroll-reveal for sections
      4. Copy-email button + footer year
-     5. Screenshot lightbox (case-study pages)
    Everything degrades gracefully if JS is disabled.
    ========================================================================== */
 
@@ -111,31 +110,4 @@
 
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
-
-  /* ---------- 5. Screenshot lightbox (case-study pages) ---------- */
-  var lightbox = document.querySelector('.lightbox');
-  if (lightbox && typeof lightbox.showModal === 'function') {
-    var lbImg = lightbox.querySelector('img');
-    var lbClose = lightbox.querySelector('.lightbox-close');
-    var lastTrigger = null;
-
-    Array.prototype.forEach.call(document.querySelectorAll('a.shot'), function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var thumb = link.querySelector('img');
-        lbImg.src = link.getAttribute('href');
-        lbImg.alt = thumb ? thumb.alt : '';
-        lastTrigger = link;
-        lightbox.showModal();
-      });
-    });
-
-    if (lbClose) lbClose.addEventListener('click', function () { lightbox.close(); });
-    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) lightbox.close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lightbox.open) lightbox.close(); });
-    lightbox.addEventListener('close', function () {
-      lbImg.removeAttribute('src');
-      if (lastTrigger) lastTrigger.focus();
-    });
-  }
 })();

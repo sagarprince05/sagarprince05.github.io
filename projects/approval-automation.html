@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval Workflow Automation — Prince Sagar</title>
+  <meta name="description" content="A web-form and email approval system that replaced a manual, spreadsheet-based sign-off process — built with JavaScript, REST APIs and PostgreSQL.">
+  <meta name="author" content="Prince Sagar">
+  <meta name="theme-color" content="#07090f">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Approval Workflow Automation — Prince Sagar">
+  <meta property="og:description" content="Replaced a manual spreadsheet sign-off process with automated forms, one-click email approvals and a live dashboard.">
+  <meta property="og:url" content="https://sagarprince05.github.io/projects/approval-automation.html">
+  <meta property="og:image" content="https://sagarprince05.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://sagarprince05.github.io/projects/approval-automation.html">
+  <link rel="icon" href="../assets/favicon.svg?v=20260928" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260928">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="../index.html">Prince Sagar</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#work">Projects</a>
+        <a href="../index.html#background">Experience</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-dark" href="mailto:prince.nbt05@gmail.com">Get in touch</a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="container nav-panel" id="nav-panel" aria-label="Mobile">
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#work">Projects</a>
+      <a href="../index.html#background">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="content" class="case">
+    <article>
+      <header class="reveal">
+        <p class="case-eyebrow">Project · Internship</p>
+        <h1 class="case-title">Approval Workflow Automation</h1>
+        <p class="case-lede">An internal web-form and email approval system that replaced a manual, spreadsheet-and-email sign-off process for an operations team — from first submission to final approval, with automatic notifications and a live status dashboard.</p>
+
+        <dl class="case-meta">
+          <div><dt>My role</dt><dd>Designed, specified, built, tested and rolled out the complete system</dd></div>
+          <div><dt>Context</dt><dd>Software developer internship</dd></div>
+          <div><dt>Status</dt><dd>Running in production, in daily use</dd></div>
+          <div><dt>Replaced</dt><dd>Spreadsheets, email threads and manual follow-up</dd></div>
+        </dl>
+
+        <ul class="stats" aria-label="Highlights">
+          <li class="stat"><div class="stat-value">&lt;60<small>s</small></div><div class="stat-label">from submission to the approver's inbox</div></li>
+          <li class="stat"><div class="stat-value">2</div><div class="stat-label">stage workflow, fully automated</div></li>
+          <li class="stat"><div class="stat-value">0</div><div class="stat-label">manual tracking steps left in the process</div></li>
+          <li class="stat"><div class="stat-value">100%</div><div class="stat-label">of release checks passed in the final audit</div></li>
+        </ul>
+      </header>
+
+      <div class="prose reveal">
+        <h2>The problem</h2>
+        <p>A two-stage approval process ran on spreadsheets, email threads and manual follow-up. Approvers were chased by hand, decisions were typed into sheets, nobody was notified automatically, records didn't match between the two stages, and there was no single view of where any request stood.</p>
+
+        <h2>What I built</h2>
+        <ul>
+          <li><strong>Two responsive web forms</strong> whose fields, labels, required flags and dropdowns are all driven by a configuration sheet — so the team can change the forms without touching code.</li>
+          <li><strong>Automatic reference IDs</strong> — sequential, never duplicated, issued in about three seconds and sent only to the submitter. The second form opens only with a valid ID and auto-fills the record's details.</li>
+          <li><strong>One-click email approvals.</strong> Approvers get a personal, signed link; whoever answers first settles it, and forged or forwarded links are rejected.</li>
+          <li><strong>A review page</strong> that shows the request's details with inline media, and makes an invalid decision impossible to record (approve and reject are mutually exclusive).</li>
+          <li><strong>Automatic notifications</strong> to every stakeholder at each decision, plus a login-protected live dashboard showing status, approver and timestamps.</li>
+        </ul>
+
+        <h2>How I worked</h2>
+        <ul>
+          <li><strong>Sample before deploy.</strong> Every change was previewed as a working sample and signed off by stakeholders before going live.</li>
+          <li><strong>Zero-disruption rollouts.</strong> Links and emails issued before a change kept working after it.</li>
+          <li><strong>Hunting silent failures.</strong> I found and fixed submissions rejected by hidden required fields, answers dropped by a missing backend column, and notifications skipped when a decision bypassed the workflow — then recovered the messages that had been missed.</li>
+          <li><strong>Security review.</strong> Signed per-person links, dashboard authentication, and an access audit that tightened who could open the underlying data.</li>
+        </ul>
+
+        <h2>Technologies</h2>
+        <ul class="tags" aria-label="Technologies used">
+          <li>JavaScript</li><li>Google Apps Script</li><li>HTML &amp; CSS</li><li>REST APIs</li><li>PostgreSQL</li><li>Supabase</li><li>Email APIs</li><li>Git</li>
+        </ul>
+
+        <p style="margin-top:1.5rem"><em>Built during an internship. Company data, internal URLs and screenshots are omitted; happy to talk through the design in an interview.</em></p>
+      </div>
+
+      <footer class="case-footer">
+        <a class="inline-link" href="ai-data-assistant.html">
+          <svg class="arrow-back" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+          Previous: AI Data Assistant
+        </a>
+        <a class="inline-link" href="price-intelligence.html">
+          Next: Price Intelligence Pipeline
+          <svg class="arrow-right" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/></svg>
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <script src="../script.js?v=20260928" defer></script>
+</body>
+</html>
