@@ -153,8 +153,8 @@ em { font-family: var(--font-serif); font-style: italic; }
 .rule { display: block; width: 100%; max-width: 14rem; height: 12px; margin: 1.25rem auto 0; color: var(--accent); }
 
 /* ---------- Hero ---------- */
-.hero { padding: 3rem 0 1rem; text-align: center; position: relative; z-index: 2; }
-@media (min-width: 768px) { .hero { padding: 4.5rem 0 1.5rem; } }
+.hero { padding: 3.5rem 0 1rem; text-align: center; position: relative; z-index: 2; }
+@media (min-width: 768px) { .hero { padding: 5rem 0 1.5rem; } }
 
 .hero-seal {
   width: 92px; height: 116px; margin: 0 auto 1.75rem;
@@ -185,8 +185,8 @@ em { font-family: var(--font-serif); font-style: italic; }
 
 /* ---------- Ticker ---------- */
 .ticker {
-  overflow: hidden; padding: 1rem 0; position: relative; z-index: 2;
-  border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  overflow: hidden; padding: 0.85rem 0; position: relative; z-index: 2;
+  border-bottom: 2px solid var(--accent);
   background: var(--bg-deep);
 }
 .ticker-track { display: flex; gap: 2.5rem; width: max-content; animation: tick 40s linear infinite; }
