@@ -31,7 +31,6 @@
   --shadow-lift: 10px 14px 0 rgba(0, 0, 0, 0.4);
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --max-w: 1080px;
-  --rail: 72px;
 }
 
 /* ---------- Reset & base ---------- */
@@ -68,34 +67,6 @@ em { font-family: var(--font-serif); font-style: italic; }
   padding: 0.75rem 1rem; background: var(--accent); color: var(--on-accent); font-weight: 600; border-radius: var(--radius);
 }
 .skip-link:focus { top: 1rem; }
-
-/* ---------- Decorative stamp rails (desktop only) ---------- */
-.rail {
-  position: fixed; top: 0; bottom: 0; width: var(--rail);
-  display: none; z-index: 1; pointer-events: none;
-  overflow: hidden;
-}
-.rail-l { left: 0; }
-.rail-r { right: 0; }
-.rail-track { display: flex; flex-direction: column; gap: 14px; padding: 14px 0; animation: railScroll 110s linear infinite; }
-.rail-r .rail-track { animation-direction: reverse; }
-@keyframes railScroll { to { transform: translateY(-50%); } }
-.stamp {
-  position: relative;
-  width: 50px; height: 50px; flex: none; margin: 0 auto;
-  display: grid; place-items: center;
-  background: var(--accent); color: var(--on-accent);
-  opacity: 0.85;
-}
-/* inner dashed ring reads as a postage stamp without masking the artwork */
-.stamp::after {
-  content: ''; position: absolute; inset: 4px;
-  border: 1.5px dashed rgba(6, 18, 14, 0.45);
-}
-.stamp svg { width: 24px; height: 24px; position: relative; }
-.stamp.alt { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
-.stamp.alt::after { border-color: rgba(143, 227, 194, 0.5); }
-@media (min-width: 1280px) { .rail { display: block; } }
 
 /* ---------- Header / nav ---------- */
 .site-header {
@@ -543,6 +514,6 @@ em { font-family: var(--font-serif); font-style: italic; }
 /* ---------- Print ---------- */
 @media print {
   body { background: #fff; color: #000; }
-  .rail, .site-header, .ticker, .socials, .skip-link { display: none !important; }
+  .site-header, .ticker, .socials, .skip-link { display: none !important; }
   .paper { box-shadow: none; border: 1px solid #ccc; transform: none !important; }
 }
