@@ -9,7 +9,7 @@ OUT = os.path.join(ROOT, "assets", "og.png")
 PHOTO = os.path.join(ROOT, "assets", "prince.webp")
 FONTS = r"C:\Windows\Fonts"
 
-BG, GOLD, INK, MUTED = (9, 13, 22), (143, 227, 194), (244, 246, 250), (182, 191, 204)
+BG, GOLD, INK, MUTED = (33, 33, 33), (227, 83, 66), (245, 225, 205), (167, 156, 147)
 bold = lambda s: ImageFont.truetype(f"{FONTS}\\segoeuib.ttf", s)
 reg = lambda s: ImageFont.truetype(f"{FONTS}\\segoeui.ttf", s)
 serif_i = lambda s: ImageFont.truetype(f"{FONTS}\\georgiai.ttf", s)
@@ -18,9 +18,9 @@ serif_i = lambda s: ImageFont.truetype(f"{FONTS}\\georgiai.ttf", s)
 img = Image.new("RGB", (W, H), BG)
 glow = Image.new("RGB", (W, H), BG)
 g = ImageDraw.Draw(glow)
-g.ellipse((640, 40, 1260, 720), fill=(47, 107, 255))
+g.ellipse((640, 40, 1260, 720), fill=(227, 83, 66))
 glow = glow.filter(ImageFilter.GaussianBlur(140))
-img = Image.blend(img, glow, 0.6)
+img = Image.blend(img, glow, 0.28)
 
 # Photo cutout, grayscale, anchored bottom-right
 photo = Image.open(PHOTO).convert("RGBA")
@@ -37,8 +37,8 @@ PAD = 72
 # Badge
 badge = "AI  ·  Automation  ·  Full-stack"
 bf = reg(20); bw = d.textlength(badge, font=bf)
-d.rounded_rectangle((PAD, 70, PAD + bw + 36, 70 + 40), radius=20, fill=(20, 28, 44), outline=(60, 72, 96))
-d.text((PAD + 18, 77), badge, font=bf, fill=INK)
+d.rectangle((PAD, 70, PAD + bw + 36, 70 + 40), fill=(227, 83, 66))
+d.text((PAD + 18, 77), badge, font=bf, fill=(245, 225, 205))
 
 # Headline
 d.text((PAD - 4, 138), "Hi, I'm Prince", font=bold(84), fill=INK)
